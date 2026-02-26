@@ -21,7 +21,9 @@ function Register(){
             }
         });
         console.log(response);
-        
+        if(response.status === 201){
+            alert('Успешная регистрация!');
+        }
     }
 
     return(
