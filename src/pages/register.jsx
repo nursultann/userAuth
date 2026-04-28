@@ -7,11 +7,24 @@ function Register(){
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [avatar, setAvatar] = useState('');
+    const [users, setUsers] = useState([]);
     
+    const fetchUsers = async () =>{
+        const response = await axios.get('https://69a007f73188b0b1d537859e.mockapi.io/myapp');
+        console.log(response.data);
+        setUsers(response.data);
+    }
+
     const SignUp = async () =>{
+        await fetchUsers();
+        const userExists = users.some((user) => user.email === email);
+        if(userExists){
+            alert('Пользователь с таким email уже существует!');
+            return;
+        }
         const response = await axios({
             method: 'post',
-            url: 'https://69a007f73188b0b1d537859e.mockapi.io/myapp',
+            url: 'https://67077010a0e04071d22a495c.mockapi.io/users',
             data: {
                 name: username,
                 password: password,
